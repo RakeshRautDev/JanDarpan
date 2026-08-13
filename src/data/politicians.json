@@ -1,0 +1,57 @@
+[
+    {
+        "id": "delhi_east_mp",
+        "slug": "delhi_east",
+        "name": "Rahul Sharma",
+        "party": "BJP",
+        "constituency": "East Delhi",
+        "state": "Delhi",
+        "criminalCases": 2,
+        "assets": "₹5.2 Cr",
+        "recentScore": 42
+    },
+    {
+        "id": "guj_ahmedabad_west_mp",
+        "slug": "guj_ahmedabad_west",
+        "name": "Priya Patel",
+        "party": "INC",
+        "constituency": "Ahmedabad West",
+        "state": "Gujarat",
+        "criminalCases": 0,
+        "assets": "₹12.4 Cr",
+        "recentScore": 88
+    },
+    {
+        "id": "dl_chandni_chowk_mp",
+        "slug": "dl_chandni_chowk",
+        "name": "Vikram Singh",
+        "party": "AAP",
+        "constituency": "Chandni Chowk",
+        "state": "Delhi",
+        "criminalCases": 1,
+        "assets": "₹1.1 Cr",
+        "recentScore": 75
+    },
+    {
+        "id": "ts_hyd_mp",
+        "slug": "ts_hyd",
+        "name": "Ananya Reddy",
+        "party": "BRS",
+        "constituency": "Hyderabad",
+        "state": "Telangana",
+        "criminalCases": 0,
+        "assets": "₹45.6 Cr",
+        "recentScore": 92
+    },
+    {
+        "id": "wb_kolkata_dakshin_mp",
+        "slug": "wb_kolkata_dakshin",
+        "name": "Kiran Kumar",
+        "party": "TMC",
+        "constituency": "Kolkata Dakshin",
+        "state": "West Bengal",
+        "criminalCases": 5,
+        "assets": "₹8.9 Cr",
+        "recentScore": 31
+    }
+]

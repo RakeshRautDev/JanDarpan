@@ -1,0 +1,47 @@
+{
+    "translation": {
+        "nav": {
+            "liveMap": "Live Map",
+            "reportIssue": "Report Issue",
+            "rankings": "Rankings",
+            "officialPortal": "Official Portal"
+        },
+        "home": {
+            "heroTitle": "जन दर्पण",
+            "heroSubtitle": "Mirror of the People",
+            "heroDesc": "Hold politicians accountable. Report civic issues with AI-verified geo-tagged evidence. Track resolution in real time.",
+            "reportBtn": "Report an Issue",
+            "viewRankings": "View Rankings",
+            "activeIssues": "Active Issues",
+            "resolvedValidated": "Resolved Validated",
+            "aiVerificationRate": "AI Verification Rate",
+            "liveRadar": "Live Civic Issue Radar",
+            "liveRadarDesc": "Real-time geospatial breakdown of reported civic issues."
+        },
+        "report": {
+            "title": "Report an Issue",
+            "subtitle": "Take a photo of the problem. Our AI will analyze the severity and we'll automatically capture your verified location.",
+            "step1Title": "Capture Evidence Data",
+            "descLabel": "Issue Description (Optional but helps AI verification)",
+            "descPlaceholder": "Describe the problem, e.g., 'Deep pothole causing accidents near the crossing...'",
+            "step2Title": "Verify Geospatial Location",
+            "analyzing": "Analyzing image structure and civic classification...",
+            "publishBtn": "Publish Report Publicly",
+            "uploadingBtn": "Uploading Evidence to Cloud...",
+            "aiActive": "Gemini AI Active"
+        },
+        "map": {
+            "verify": "Verify",
+            "verifying": "Verifying...",
+            "severity": "AI Severity Score",
+            "alreadyVoted": "You have already verified this issue.",
+            "walkStreet": "Walk My Street",
+            "walkStreetDesc": "Showing issues within 500m of your location"
+        },
+        "common": {
+            "open": "OPEN",
+            "investigating": "INVESTIGATING",
+            "resolved": "RESOLVED"
+        }
+    }
+}

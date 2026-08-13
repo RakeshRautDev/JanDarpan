@@ -1,0 +1,8 @@
+{
+  "rewrites": [
+    {
+      "source": "/myneta/:path*",
+      "destination": "https://nish.space/my_neta/:path*"
+    }
+  ]
+}
