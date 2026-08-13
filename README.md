@@ -1,25 +1,47 @@
-# JanDarpan - Mirror of the People 🇮🇳
+<div align="center">
+  <img src="public/vite.svg" alt="JanDarpan Logo" width="100"/>
+  <h1>JanDarpan - Mirror of the People 🇮🇳</h1>
+  <p><strong>An AI-powered civic accountability platform empowering citizens to report local infrastructure issues and track official responses.</strong></p>
 
-JanDarpan is an open-source civic accountability platform that empowers citizens to report local infrastructure issues and holds elected officials accountable. By leveraging AI image classification, geolocation mapping, and a real-time dashboard, JanDarpan bridges the gap between citizens and their representatives.
+  [![Live Demo](https://img.shields.io/badge/Live%20Demo-jandarpan.vercel.app-blue?style=for-the-badge&logo=vercel)](https://jandarpan.vercel.app)
+  
+</div>
 
-## Features ✨
+---
 
-*   **📸 AI-Powered Issue Reporting:** Citizens can snap a photo of a civic issue (like a pothole or open drain). The app automatically strips EXIF data for privacy and uses Gemini AI (or Groq Llama fallback) to classify the issue and assign a severity score (1-10).
-*   **🗺️ Live Radar Map:** A real-time, interactive map (powered by Leaflet.js) that plots all reported issues across India. 
-*   **🗳️ Community Verification:** Community members can view issues on the map and "verify" (upvote) them to validate their authenticity.
-*   **🏛️ Official Dashboard:** Elected officials have a secure login to view issues reported specifically in their constituency. They can track the status of problems and mark them as "Resolved" once fixed.
-*   **🏆 Rankings & Hall of Fame:** The platform ranks elected officials based on their response time and issue resolution rates.
-*   **⚖️ MyNeta Integration:** Click on any constituency on the Live Radar map to instantly view the Member of Parliament's details pulled directly from the **MyNeta API**, including their educational background and any declared **criminal cases** (creating a transparent Hall of Fame/Shame).
-*   **📊 Live Statistics:** The landing page features dynamic, animated statistics pulling real-time data from the Appwrite backend.
+## 📖 About The Application
 
-## Tech Stack 🛠️
+JanDarpan (translating to "Mirror of the People") bridges the gap between citizens and their elected representatives. It addresses the common problem of civic issues (like potholes, garbage dumps, and broken streetlights) going unnoticed by authorities. By combining crowdsourcing, AI verification, and live geospatial tracking, JanDarpan ensures that every reported issue is visible, verified, and directed to the correct local official.
 
-*   **Frontend:** React, Vite, Tailwind CSS, Framer Motion
-*   **Backend as a Service (BaaS):** Appwrite (Authentication, Database, Storage)
-*   **Serverless APIs:** Vercel Serverless Functions (`api/` directory using `node-appwrite`)
-*   **AI Models:** Google Gemini 2.5 Flash, Groq Llama
-*   **Mapping:** Leaflet.js, React-Leaflet
-*   **Icons:** Lucide React
+### Core Features
+
+*   **📸 AI-Verified Issue Reporting:** Citizens can snap a photo of a civic issue. To prevent spam and abuse, JanDarpan uses Google Gemini AI to analyze the image, confirm it is a genuine outdoor civic problem, automatically categorize it, and assign a severity score (1-10).
+*   **🗺️ Live Radar Map:** A real-time, interactive map that plots all reported issues across the country. It clusters nearby issues and visually indicates their severity and current resolution status.
+*   **🗳️ Community Validation:** To further ensure authenticity, community members can view issues on the map and "verify" (upvote) them, signaling to officials that the problem is affecting many people.
+*   **🏛️ Secure Official Dashboard:** Elected officials are provided with secure accounts. They can log in to view a filtered dashboard of issues reported specifically in their jurisdiction. They can track the status, and once a repair is made, update the issue to "Resolved".
+*   **⚖️ NetaKhoj (MyNeta) Integration:** Total transparency for politicians. Users can click on any constituency on the Live Radar map to instantly view their Member of Parliament's details (pulled from the MyNeta API), including educational background and declared criminal cases.
+*   **🏆 Accountability Rankings:** The platform ranks elected officials based on their response time and issue resolution rates, creating a transparent Hall of Fame (and Shame).
+
+---
+
+## 💻 Technical Architecture
+
+JanDarpan is built to be a fast, responsive, and secure modern web application. It utilizes a Serverless architecture to ensure high availability and security.
+
+### 🛠️ Technology Stack
+
+*   **Frontend Framework:** React.js powered by Vite for lightning-fast HMR and optimized production builds.
+*   **Styling & UI:** Tailwind CSS for utility-first styling, and Framer Motion for premium, liquid-smooth animations.
+*   **Database & Storage:** Appwrite (Backend-as-a-Service) is used for storing civic issues, politician data, and user authentication. Appwrite Storage handles secure, compressed uploads of evidence photos.
+*   **Serverless APIs:** Vercel Edge Serverless Functions (`api/` directory) act as a secure proxy for all database interactions. This hides database credentials from the client and allows for strict server-side validation.
+*   **Artificial Intelligence:** Google Gemini 2.5 Flash Vision API (with Groq Llama fallbacks) handles image recognition and natural language processing for issue verification.
+*   **Geospatial Mapping:** Leaflet.js and React-Leaflet handle the rendering of the Live Radar Map, plotting complex GeoJSON constituency boundaries efficiently.
+
+### 🔐 Security & Privacy Implementation
+
+1.  **Server-Side Database Proxy:** The frontend never connects directly to the Appwrite Database SDK. Instead, it hits `/api/issues` endpoints on Vercel. These endpoints use the `node-appwrite` Server SDK, which bypasses Row Level Security (RLS) safely on the backend using a private API key, protecting the Database structure from malicious users.
+2.  **EXIF Data Stripping:** To protect the anonymity and physical safety of whistleblowers, all uploaded photos are stripped of EXIF metadata (like device model and precise original capture coordinates) before being stored.
+3.  **Cross-Origin Proxies (CORS):** The application relies on external APIs (like MyNeta) that do not natively support CORS. This is bypassed securely using Vercel's `vercel.json` edge rewrites, piping requests through the Vercel edge network to avoid browser preflight blocks.
 
 ---
 
@@ -30,28 +52,17 @@ Follow these steps to get JanDarpan running locally on your machine.
 ### 1. Prerequisites
 *   Node.js (v18 or higher)
 *   An [Appwrite](https://appwrite.io/) account (Cloud or Self-Hosted)
-*   A [Google Gemini API Key](https://aistudio.google.com/) (Optional, but recommended for AI features)
+*   A [Google Gemini API Key](https://aistudio.google.com/)
 
 ### 2. Clone and Install
 ```bash
-# Navigate to the project directory
+git clone <your-github-repo-url>
 cd jandarpan
-
-# Install dependencies
 npm install
 ```
 
-### 3. Appwrite Backend Setup
-You need to configure your Appwrite backend. We have provided an automated script to create the necessary database, collections, and attributes for you.
-
-1. Go to your Appwrite Console and create a new Project.
-2. Go to **Settings** and copy your **Project ID** and **API Endpoint**.
-3. Create an API Key in Appwrite (Settings -> API Keys) with the following scopes:
-   * `databases.read`, `databases.write`, `collections.read`, `collections.write`, `attributes.read`, `attributes.write`
-4. Create a Storage Bucket in Appwrite for storing issue photos. Copy the **Bucket ID**.
-
-### 4. Environment Variables
-Create a `.env` file in the root of the `jandarpan` directory and fill in your details:
+### 3. Environment Setup
+Create a `.env` file in the root directory:
 
 ```env
 VITE_APPWRITE_ENDPOINT="https://cloud.appwrite.io/v1"
@@ -61,15 +72,14 @@ VITE_APPWRITE_ISSUES_COLLECTION_ID="your_issues_collection_id"
 VITE_APPWRITE_REPRESENTATIVES_COLLECTION_ID="your_reps_collection_id"
 VITE_APPWRITE_STORAGE_BUCKET_ID="your_storage_bucket_id"
 
-# API Key used by the setup script (Do NOT expose this in frontend code)
+# Vercel Serverless Backend Key (Requires Full Read/Write Permissions)
 APPWRITE_API_KEY="your_secret_api_key"
 
-# Optional: Gemini API for Image Classification
+# Google Gemini Vision Key
 VITE_GEMINI_API_KEY="your_gemini_key"
 ```
-*(Note: If you already ran the automated script with `node setup-appwrite.js`, your `.env` is likely already populated!)*
 
-### 5. Run the Application
+### 4. Run Locally
 ```bash
 npm run dev
 ```
@@ -79,42 +89,12 @@ Open `http://localhost:5173` in your browser.
 
 ## 🌩️ Deployment to Vercel
 
-JanDarpan utilizes **Vercel Serverless Functions** in the `api/` directory for secure database operations.
-
 1. Ensure you have the [Vercel CLI](https://vercel.com/docs/cli) installed (`npm i -g vercel`).
-2. Run `vercel --prod` to deploy.
-3. **IMPORTANT:** Go to your Vercel Project Settings -> Environment Variables, and add the `APPWRITE_API_KEY` exactly as it is in your `.env`. Without this, the Serverless backend will return 500 errors.
+2. Run `vercel --prod` to deploy to Vercel's Edge Network.
+3. **IMPORTANT:** Go to your Vercel Dashboard -> Project Settings -> Environment Variables. You MUST add your `APPWRITE_API_KEY` here. If you omit this, the Serverless backend will fail to connect to Appwrite and return 500 errors.
+4. Go to your Appwrite Dashboard -> Project -> Platforms. Add your Vercel deployment URL (e.g., `jandarpan.vercel.app`) as a Web Platform to bypass Appwrite CORS restrictions.
 
 ---
-
-## 📖 How to Use the App
-
-### For Citizens (Reporting an Issue)
-1. Navigate to the **Home Page**.
-2. Click on the **"Report Issue"** button.
-3. You will be asked to upload an image of the civic problem and optionally provide a brief text description.
-4. The AI will analyze the image to confirm it is a genuine issue, assign a severity score, and categorize it (e.g., Pothole, Garbage).
-5. The issue will immediately appear on the **Live Radar Map** for the community and officials to see.
-
-### For Community (Verifying Issues)
-1. Scroll down to the **Live Radar Map** on the Home Page.
-2. Click on any colored marker on the map to see the details of the reported issue.
-3. Click the **"Verify"** button to upvote the issue and confirm to officials that it is a real problem affecting the community.
-
-### For Officials (Resolving Issues)
-1. Go to the **Official Portal** (via the footer link or by navigating to `/login`).
-2. Log in with your official Appwrite credentials.
-3. You will be taken to the **Admin Dashboard**. Here, you will see a list of all issues reported in your jurisdiction.
-4. Click on an issue to view the citizen's photo and the AI's severity assessment.
-5. Once your team has fixed the problem, change the status to **"Resolved"**. This will update the status live on the public map.
-
----
-
-## Project Structure
-*   `src/pages/`: Contains the main views (`Home.jsx`, `Report.jsx`, `Admin.jsx`, `Login.jsx`).
-*   `src/components/`: Reusable UI components (like the `LiveMap.jsx`).
-*   `src/services/`: API and database connection logic (`appwriteDB.js`, `gemini.js`).
-*   `src/contexts/`: React context providers (like `AuthContext.jsx` for managing user login state).
-
-## License
-MIT License
+<div align="center">
+  <p>Built for the citizens, by the citizens.</p>
+</div>
